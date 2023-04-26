@@ -1,6 +1,6 @@
 package com.alunosprofessores.sistema.controllers;
 
-import com.alunosprofessores.sistema.dtos.ProfessorForm;
+import com.alunosprofessores.sistema.dtos.ProfessorDTO;
 import com.alunosprofessores.sistema.models.Professor;
 import com.alunosprofessores.sistema.services.ProfessorService;
 import jakarta.validation.constraints.Positive;
@@ -24,8 +24,8 @@ public class ProfessorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Professor> createProf(@Validated @RequestBody ProfessorForm professorForm) {
-        Professor profNew = professorService.createProf(professorForm);
+    public ResponseEntity<Professor> createProf(@Validated @RequestBody ProfessorDTO professorDTO) {
+        Professor profNew = professorService.createProf(professorDTO);
         return ResponseEntity.status(201).body(profNew);
     }
 
@@ -40,7 +40,7 @@ public class ProfessorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Professor> updateProfessor(@PathVariable @Positive Long id, @RequestBody @Validated ProfessorForm professorAtt){
+    public ResponseEntity<Professor> updateProfessor(@PathVariable @Positive Long id, @RequestBody @Validated ProfessorDTO professorAtt){
         return new ResponseEntity<>(professorService.updateProfessor(id,professorAtt),HttpStatus.CREATED);
     }
 

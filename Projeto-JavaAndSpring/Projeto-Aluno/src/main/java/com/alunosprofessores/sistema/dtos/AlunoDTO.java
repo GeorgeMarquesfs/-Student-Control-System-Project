@@ -1,18 +1,20 @@
 package com.alunosprofessores.sistema.dtos;
 
-import com.alunosprofessores.sistema.models.Disciplina;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProfessorForm {
+public class AlunoDTO {
 
     private String nome;
+    private Long matricula;
+    private LocalDate dataNasc;
     private String email;
+    private String curso;
+
 }

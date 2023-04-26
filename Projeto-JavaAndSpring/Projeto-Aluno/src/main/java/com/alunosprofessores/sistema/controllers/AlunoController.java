@@ -1,7 +1,6 @@
 package com.alunosprofessores.sistema.controllers;
 
-import com.alunosprofessores.sistema.dtos.AlunoForm;
-import com.alunosprofessores.sistema.exception.RecordNotFoundException;
+import com.alunosprofessores.sistema.dtos.AlunoDTO;
 import com.alunosprofessores.sistema.models.Aluno;
 import com.alunosprofessores.sistema.services.AlunoService;
 import jakarta.validation.constraints.Positive;
@@ -25,8 +24,8 @@ public class AlunoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Aluno> createAluno(@RequestBody @Validated AlunoForm alunoForm) {
-        Aluno alunoCreated = alunoService.createAlunoService(alunoForm);
+    public ResponseEntity<Aluno> createAluno(@RequestBody @Validated AlunoDTO alunoDTO) {
+        Aluno alunoCreated = alunoService.createAlunoService(alunoDTO);
         return ResponseEntity.status(201).body(alunoCreated);
     }
 

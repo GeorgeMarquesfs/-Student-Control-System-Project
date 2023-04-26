@@ -1,6 +1,6 @@
 package com.alunosprofessores.sistema.services;
 
-import com.alunosprofessores.sistema.dtos.AlunoForm;
+import com.alunosprofessores.sistema.dtos.AlunoDTO;
 import com.alunosprofessores.sistema.exception.RecordNotFoundException;
 import com.alunosprofessores.sistema.models.Aluno;
 import com.alunosprofessores.sistema.repositorys.AlunoRepository;
@@ -18,13 +18,13 @@ public class AlunoService {
     AlunoRepository alunoRepository;
 
 
-    public Aluno createAlunoService (AlunoForm alunoForm){
+    public Aluno createAlunoService (AlunoDTO alunoDTO){
         Aluno novoAluno = new Aluno();
-        novoAluno.setNome(alunoForm.getNome());
-        novoAluno.setMatricula(alunoForm.getMatricula());
-        novoAluno.setDataNasc(alunoForm.getDataNasc());
-        novoAluno.setEmail(alunoForm.getEmail());
-        novoAluno.setCurso(alunoForm.getCurso());
+        novoAluno.setNome(alunoDTO.getNome());
+        novoAluno.setMatricula(alunoDTO.getMatricula());
+        novoAluno.setDataNasc(alunoDTO.getDataNasc());
+        novoAluno.setEmail(alunoDTO.getEmail());
+        novoAluno.setCurso(alunoDTO.getCurso());
         return alunoRepository.save(novoAluno);
     }
 

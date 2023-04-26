@@ -1,6 +1,7 @@
 package com.alunosprofessores.sistema.dtos;
 
 
+import com.alunosprofessores.sistema.models.Professor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DisciplinaForm {
+public class DisciplinaDTO {
 
     private String nome;
     private Integer cargaHoraria;
+    private Professor professor;
 }

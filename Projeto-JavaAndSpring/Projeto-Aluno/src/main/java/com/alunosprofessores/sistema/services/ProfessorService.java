@@ -1,6 +1,6 @@
 package com.alunosprofessores.sistema.services;
 
-import com.alunosprofessores.sistema.dtos.ProfessorForm;
+import com.alunosprofessores.sistema.dtos.ProfessorDTO;
 import com.alunosprofessores.sistema.exception.RecordNotFoundException;
 import com.alunosprofessores.sistema.models.Professor;
 import com.alunosprofessores.sistema.repositorys.ProfessorRepository;
@@ -18,10 +18,10 @@ public class ProfessorService {
     ProfessorRepository professorRepository;
 
 
-    public Professor createProf(ProfessorForm professorForm){
+    public Professor createProf(ProfessorDTO professorDTO){
         Professor profNew = new Professor();
-        profNew.setNome(professorForm.getNome());
-        profNew.setEmail(professorForm.getEmail());
+        profNew.setNome(professorDTO.getNome());
+        profNew.setEmail(professorDTO.getEmail());
         return professorRepository.save(profNew);
     }
 
@@ -33,7 +33,7 @@ public class ProfessorService {
         return professorRepository.findAll();
     }
 
-    public Professor updateProfessor(Long id, ProfessorForm professorAtt){
+    public Professor updateProfessor(Long id, ProfessorDTO professorAtt){
         Optional<Professor> professor = Optional.of(professorRepository.getReferenceById(id));
         BeanUtils.copyProperties(professorAtt, professor.get(), "id");
         Professor professorAtualizado = professorRepository.save(professor.get());
@@ -44,4 +44,5 @@ public class ProfessorService {
         professorRepository.delete(professorRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException(id)));
     }
+
 }
