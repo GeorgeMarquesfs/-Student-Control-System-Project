@@ -3,6 +3,7 @@ package com.alunosprofessores.sistema.controllers;
 import com.alunosprofessores.sistema.dtos.ProfessorForm;
 import com.alunosprofessores.sistema.models.Professor;
 import com.alunosprofessores.sistema.services.ProfessorService;
+import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,10 +11,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/professor")
+@CrossOrigin(origins = "*")
 public class ProfessorController {
 
 
@@ -28,12 +30,8 @@ public class ProfessorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Professor> getProf(@PathVariable Long id) {
-        Optional<Professor> professor = professorService.getProfessor(id);
-        if(professor.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(professor.get(),HttpStatus.OK);
+    public Professor getProf(@PathVariable Long id) {
+        return professorService.getProfessor(id);
     }
 
     @GetMapping("/ListaProfessores")
@@ -42,18 +40,14 @@ public class ProfessorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Professor> updateProfessor(@PathVariable Long id, @RequestBody ProfessorForm professorAtt){
+    public ResponseEntity<Professor> updateProfessor(@PathVariable @Positive Long id, @RequestBody @Validated ProfessorForm professorAtt){
         return new ResponseEntity<>(professorService.updateProfessor(id,professorAtt),HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteProf(@PathVariable Long id){
-        Optional<Professor> professor = professorService.getProfessor(id);
-        if(professor.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        professorService.deleteProf(professor.get().getId());
-        return new ResponseEntity<>(HttpStatus.OK);
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteProf(@PathVariable @Positive Long id){
+        professorService.deleteProf(id);
     }
 
 }

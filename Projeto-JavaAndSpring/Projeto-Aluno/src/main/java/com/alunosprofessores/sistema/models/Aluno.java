@@ -2,6 +2,7 @@ package com.alunosprofessores.sistema.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,6 +36,7 @@ public class Aluno {
     private LocalDate dataNasc;
 
     @Column(nullable = false, length = 100)
+    @Email(message = "O e-mail informado não é válido")
     private String email;
 
     @Column(nullable = false)

@@ -1,6 +1,7 @@
 package com.alunosprofessores.sistema.services;
 
 import com.alunosprofessores.sistema.dtos.ProfessorForm;
+import com.alunosprofessores.sistema.exception.RecordNotFoundException;
 import com.alunosprofessores.sistema.models.Professor;
 import com.alunosprofessores.sistema.repositorys.ProfessorRepository;
 import org.springframework.beans.BeanUtils;
@@ -20,12 +21,12 @@ public class ProfessorService {
     public Professor createProf(ProfessorForm professorForm){
         Professor profNew = new Professor();
         profNew.setNome(professorForm.getNome());
-        profNew.setListaCadeirasFacul(professorForm.getListaCadeirasFacul());
+        profNew.setEmail(professorForm.getEmail());
         return professorRepository.save(profNew);
     }
 
-    public Optional<Professor> getProfessor(Long id){
-        return professorRepository.findById(id);
+    public Professor getProfessor(Long id){
+        return professorRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
     public List<Professor> getAllProf(){
@@ -40,6 +41,7 @@ public class ProfessorService {
 
     }
     public void deleteProf(Long id){
-        professorRepository.deleteById(id);
+        professorRepository.delete(professorRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException(id)));
     }
 }

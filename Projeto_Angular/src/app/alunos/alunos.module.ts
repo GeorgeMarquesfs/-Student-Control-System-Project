@@ -11,12 +11,12 @@ import { AlunosListComponent } from './components/alunos-list/alunos-list.compon
 
 
 
-
 @NgModule({
   declarations: [
     AlunosComponent,
     AlunosFormComponent,
-    AlunosListComponent
+    AlunosListComponent,
+
   ],
   imports: [
     CommonModule,

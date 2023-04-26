@@ -6,18 +6,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NavComponent } from './nav/nav.component';
+import { MatSidenavModule} from '@angular/material/sidenav'
+import { MatListModule } from '@angular/material/list'
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSidenavModule,
+    MatListModule
 
   ],
   providers: [],

@@ -10,6 +10,7 @@ import { AlunosService } from '../../services/alunos.service';
 import { Aluno } from './../../model/aluno';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
+
 @Component({
   selector: 'app-alunos',
   templateUrl: './alunos.component.html',
