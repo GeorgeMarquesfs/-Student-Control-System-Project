@@ -1,8 +1,8 @@
 package com.alunosprofessores.sistema.controllers;
 
-import com.alunosprofessores.sistema.dtos.AlunoDTO;
+import com.alunosprofessores.sistema.models.dtos.AlunoDto;
 import com.alunosprofessores.sistema.models.Aluno;
-import com.alunosprofessores.sistema.services.AlunoService;
+import com.alunosprofessores.sistema.services.Impl.AlunoServiceImpl;
 import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,36 +19,36 @@ import java.util.List;
 public class AlunoController {
 
     @Autowired
-    AlunoService alunoService;
+    AlunoServiceImpl alunoServiceImpl;
 
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Aluno> createAluno(@RequestBody @Validated AlunoDTO alunoDTO) {
-        Aluno alunoCreated = alunoService.createAlunoService(alunoDTO);
+    public ResponseEntity<Aluno> createAluno(@RequestBody @Validated AlunoDto alunoDTO) {
+        Aluno alunoCreated = alunoServiceImpl.createAlunoService(alunoDTO);
         return ResponseEntity.status(201).body(alunoCreated);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Aluno getAluno( @PathVariable @Positive Long id) {
-        return alunoService.getAluno(id);
+        return alunoServiceImpl.getAluno(id);
 
     }
 
     @GetMapping("/ListarAlunos")
     public ResponseEntity<List<Aluno>> getAll() {
-        return new ResponseEntity<>(alunoService.getAll(),HttpStatus.OK);
+        return new ResponseEntity<>(alunoServiceImpl.getAll(),HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Aluno> updateAluno(@PathVariable @Positive Long id, @RequestBody @Validated Aluno alunoAtt) {
-        return new ResponseEntity<>(alunoService.updateAluno(id,alunoAtt),HttpStatus.CREATED);
+        return new ResponseEntity<>(alunoServiceImpl.updateAluno(id,alunoAtt),HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteAluno(@PathVariable @Positive Long id) {
-        alunoService.deleteAluno(id);
+        alunoServiceImpl.deleteAluno(id);
     }
 }

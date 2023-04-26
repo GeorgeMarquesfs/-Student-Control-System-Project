@@ -1,9 +1,10 @@
-package com.alunosprofessores.sistema.services;
+package com.alunosprofessores.sistema.services.Impl;
 
-import com.alunosprofessores.sistema.dtos.AlunoDTO;
+import com.alunosprofessores.sistema.models.dtos.AlunoDto;
 import com.alunosprofessores.sistema.exception.RecordNotFoundException;
 import com.alunosprofessores.sistema.models.Aluno;
 import com.alunosprofessores.sistema.repositorys.AlunoRepository;
+import com.alunosprofessores.sistema.services.IAlunoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,13 +13,13 @@ import java.util.List;
 
 
 @Service
-public class AlunoService {
+public class AlunoServiceImpl implements IAlunoService {
 
     @Autowired
     AlunoRepository alunoRepository;
 
 
-    public Aluno createAlunoService (AlunoDTO alunoDTO){
+    public Aluno createAlunoService (AlunoDto alunoDTO){
         Aluno novoAluno = new Aluno();
         novoAluno.setNome(alunoDTO.getNome());
         novoAluno.setMatricula(alunoDTO.getMatricula());

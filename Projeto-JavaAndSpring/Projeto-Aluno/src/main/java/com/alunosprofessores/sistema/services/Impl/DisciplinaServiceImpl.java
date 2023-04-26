@@ -1,10 +1,11 @@
-package com.alunosprofessores.sistema.services;
+package com.alunosprofessores.sistema.services.Impl;
 
-import com.alunosprofessores.sistema.dtos.DisciplinaDTO;
+import com.alunosprofessores.sistema.models.dtos.DisciplinaDto;
 import com.alunosprofessores.sistema.exception.RecordNotFoundException;
 import com.alunosprofessores.sistema.models.Disciplina;
 import com.alunosprofessores.sistema.models.Professor;
 import com.alunosprofessores.sistema.repositorys.DisciplinaRepository;
+import com.alunosprofessores.sistema.services.IDisciplinaService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,16 +14,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DisciplinaService {
+public class DisciplinaServiceImpl implements IDisciplinaService {
 
     @Autowired
     DisciplinaRepository disciplinaRepository;
 
     @Autowired
-    private ProfessorService professorService;
+    private ProfessorServiceImpl professorServiceImpl;
 
 
-    public Disciplina create(DisciplinaDTO disciplinaDTO){
+    public Disciplina create(DisciplinaDto disciplinaDTO){
         Disciplina disciplinaNew = new Disciplina();
         disciplinaNew.setNome(disciplinaDTO.getNome());
         disciplinaNew.setCargaHoraria(disciplinaDTO.getCargaHoraria());
@@ -30,13 +31,13 @@ public class DisciplinaService {
         return disciplinaRepository.save(disciplinaNew);
     }
 
-    public DisciplinaDTO getDisciplina(Long id){
+    public DisciplinaDto getDisciplina(Long id){
         Disciplina disciplina = disciplinaRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException(id));
 
-        Professor professor = professorService.getProfessor(disciplina.getProfessor().getId());
+        Professor professor = professorServiceImpl.getProfessor(disciplina.getProfessor().getId());
 
-        return new DisciplinaDTO(
+        return new DisciplinaDto(
                 disciplina.getNome(),
                 disciplina.getCargaHoraria(),
                 professor

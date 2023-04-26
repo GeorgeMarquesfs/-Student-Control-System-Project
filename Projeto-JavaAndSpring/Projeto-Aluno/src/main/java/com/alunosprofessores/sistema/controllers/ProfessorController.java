@@ -1,8 +1,8 @@
 package com.alunosprofessores.sistema.controllers;
 
-import com.alunosprofessores.sistema.dtos.ProfessorDTO;
+import com.alunosprofessores.sistema.models.dtos.ProfessorDto;
 import com.alunosprofessores.sistema.models.Professor;
-import com.alunosprofessores.sistema.services.ProfessorService;
+import com.alunosprofessores.sistema.services.Impl.ProfessorServiceImpl;
 import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,34 +20,34 @@ public class ProfessorController {
 
 
     @Autowired
-    ProfessorService professorService;
+    ProfessorServiceImpl professorServiceImpl;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Professor> createProf(@Validated @RequestBody ProfessorDTO professorDTO) {
-        Professor profNew = professorService.createProf(professorDTO);
+    public ResponseEntity<Professor> createProf(@Validated @RequestBody ProfessorDto professorDTO) {
+        Professor profNew = professorServiceImpl.createProf(professorDTO);
         return ResponseEntity.status(201).body(profNew);
     }
 
     @GetMapping("/{id}")
     public Professor getProf(@PathVariable Long id) {
-        return professorService.getProfessor(id);
+        return professorServiceImpl.getProfessor(id);
     }
 
     @GetMapping("/ListaProfessores")
     public ResponseEntity<List<Professor>> getAllProf() {
-        return new ResponseEntity<>(professorService.getAllProf(),HttpStatus.OK);
+        return new ResponseEntity<>(professorServiceImpl.getAllProf(),HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Professor> updateProfessor(@PathVariable @Positive Long id, @RequestBody @Validated ProfessorDTO professorAtt){
-        return new ResponseEntity<>(professorService.updateProfessor(id,professorAtt),HttpStatus.CREATED);
+    public ResponseEntity<Professor> updateProfessor(@PathVariable @Positive Long id, @RequestBody @Validated ProfessorDto professorAtt){
+        return new ResponseEntity<>(professorServiceImpl.updateProfessor(id,professorAtt),HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteProf(@PathVariable @Positive Long id){
-        professorService.deleteProf(id);
+        professorServiceImpl.deleteProf(id);
     }
 
 }

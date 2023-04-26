@@ -1,4 +1,4 @@
-package com.alunosprofessores.sistema.dtos;
+package com.alunosprofessores.sistema.models.dtos;
 
 
 import com.alunosprofessores.sistema.models.Professor;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DisciplinaDTO {
+public class DisciplinaDto {
 
     private String nome;
     private Integer cargaHoraria;

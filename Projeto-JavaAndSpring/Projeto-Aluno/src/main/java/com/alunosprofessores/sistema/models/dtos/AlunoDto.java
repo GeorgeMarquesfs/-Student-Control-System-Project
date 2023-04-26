@@ -1,4 +1,4 @@
-package com.alunosprofessores.sistema.dtos;
+package com.alunosprofessores.sistema.models.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AlunoDTO {
+public class AlunoDto {
 
     private String nome;
     private Long matricula;

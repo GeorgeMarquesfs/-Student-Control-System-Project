@@ -1,10 +1,8 @@
 package com.alunosprofessores.sistema.controllers;
 
-import com.alunosprofessores.sistema.dtos.AlunoDTO;
-import com.alunosprofessores.sistema.dtos.DisciplinaDTO;
-import com.alunosprofessores.sistema.models.Aluno;
+import com.alunosprofessores.sistema.models.dtos.DisciplinaDto;
 import com.alunosprofessores.sistema.models.Disciplina;
-import com.alunosprofessores.sistema.services.DisciplinaService;
+import com.alunosprofessores.sistema.services.Impl.DisciplinaServiceImpl;
 import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,34 +17,34 @@ import java.util.List;
 public class DisciplinaController {
 
     @Autowired
-    DisciplinaService disciplinaService;
+    DisciplinaServiceImpl disciplinaServiceImpl;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Disciplina> createDisciplina(@RequestBody @Validated DisciplinaDTO disciplinaDTO){
-        Disciplina disciplinaCreated = disciplinaService.create(disciplinaDTO);
+    public ResponseEntity<Disciplina> createDisciplina(@RequestBody @Validated DisciplinaDto disciplinaDTO){
+        Disciplina disciplinaCreated = disciplinaServiceImpl.create(disciplinaDTO);
         return ResponseEntity.status(201).body(disciplinaCreated);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public DisciplinaDTO getOne(@PathVariable @Positive Long id){
-        return disciplinaService.getDisciplina(id);
+    public DisciplinaDto getOne(@PathVariable @Positive Long id){
+        return disciplinaServiceImpl.getDisciplina(id);
     }
 
     @GetMapping("/listarDisciplinas")
     public ResponseEntity<List<Disciplina>> getAll(){
-        return new ResponseEntity<>(disciplinaService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(disciplinaServiceImpl.getAll(), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Disciplina> updateDisciplina(@PathVariable @Positive Long id, @RequestBody @Validated Disciplina disciplinaAtt) {
-        return new ResponseEntity<>(disciplinaService.updateDisciplina(id,disciplinaAtt),HttpStatus.CREATED);
+        return new ResponseEntity<>(disciplinaServiceImpl.updateDisciplina(id,disciplinaAtt),HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteAluno(@PathVariable @Positive Long id) {
-        disciplinaService.deleteDisciplina(id);
+        disciplinaServiceImpl.deleteDisciplina(id);
     }
 }
