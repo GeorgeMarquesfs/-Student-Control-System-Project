@@ -19,7 +19,7 @@
       </p>
       <p>
         <mat-form-field class="full-width">
-          <input matInput placeholder="Data Nascimento*" formControlName="dataNasc">
+          <input matInput placeholder="Data Nascimento*" formControlName="dataNasc" >
           <mat-error *ngIf="form.get('dataNasc')?.invalid">{{ getErrorMessage("dataNasc") }}</mat-error>
           <mat-hint align="end"> Use o formato: yyyy-MM-dd</mat-hint>
         </mat-form-field>
@@ -32,7 +32,7 @@
       </p>
       <p>
         <mat-form-field class="full-width">
-          <input type="email" matInput placeholder="Email*" formControlName="email">
+          <input type="email" matInput placeholder="Email*" formControlName="email" type="email">
           <mat-error *ngIf="form.get('email')?.invalid">{{ getErrorMessage("email") }}</mat-error>
         </mat-form-field>
       </p>

@@ -1,9 +1,14 @@
 package com.alunosprofessores.sistema.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,7 +28,15 @@ public class Disciplina {
     @Column(nullable = false)
     private Integer cargaHoraria;
 
-    @ManyToOne
-    @JoinColumn(name = "professor_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "professor_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Professor professor;
+
+    @Formula("(SELECT nome FROM tb_professor WHERE id = professor_id )")
+    @Column(name = "professor_nome")
+    private String nomeProfessor;
 }
+
+
+//UPDATE tb_disciplina SET professor_nome = (SELECT nome FROM tb_professor WHERE id = professor_id)

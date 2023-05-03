@@ -8,13 +8,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { MatSidenavModule} from '@angular/material/sidenav'
-import { MatListModule } from '@angular/material/list'
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+
+import { HomeComponent } from './home/home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent
+    NavComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,8 @@ import { MatListModule } from '@angular/material/list'
     AppRoutingModule,
     HttpClientModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatCardModule
 
   ],
   providers: [],

@@ -1,4 +1,3 @@
-import { Aluno } from './../../model/aluno';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, NonNullableFormBuilder, Validators } from '@angular/forms';
@@ -6,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 
 import { AlunosService } from '../../services/alunos.service';
+import { Aluno } from './../../model/aluno';
 
 
 
