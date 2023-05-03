@@ -1,6 +1,7 @@
 package com.alunosprofessores.sistema.controllers;
 
 import com.alunosprofessores.sistema.models.MatriculaAluno;
+import com.alunosprofessores.sistema.models.dtos.HistoricoAlunoDto;
 import com.alunosprofessores.sistema.models.dtos.NotasAlunosDto;
 import com.alunosprofessores.sistema.services.IMatriculaAlunoService;
 import jakarta.validation.constraints.Positive;
@@ -47,6 +48,12 @@ public class MatriculaAlunoController {
     @ResponseStatus(HttpStatus.CREATED)
     public void updateNotasAluno(@PathVariable @Positive Long id, @RequestBody NotasAlunosDto notasAlunosDto){
         service.updateNotasAluno(id,notasAlunosDto);
+    }
+
+    @GetMapping("/historicoAluno/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public HistoricoAlunoDto historicoAlunoDto(@PathVariable @Positive Long id){
+        return service.historicoAluno(id);
     }
 
     @DeleteMapping("/{id}")

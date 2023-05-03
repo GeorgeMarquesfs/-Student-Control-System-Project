@@ -1,7 +1,7 @@
 package com.alunosprofessores.sistema.services;
 
 import com.alunosprofessores.sistema.models.MatriculaAluno;
-import com.alunosprofessores.sistema.models.dtos.MatriculaALunoDto;
+import com.alunosprofessores.sistema.models.dtos.HistoricoAlunoDto;
 import com.alunosprofessores.sistema.models.dtos.NotasAlunosDto;
 
 import java.util.List;
@@ -13,6 +13,7 @@ public interface IMatriculaAlunoService {
     List<MatriculaAluno> getAll();
     void updateMatricula(Long id);
     MatriculaAluno updateNotasAluno(Long id, NotasAlunosDto notasAlunosDto);
+    HistoricoAlunoDto historicoAluno(Long id);
 
     void deleteMatriculaAluno(Long id);
 }
