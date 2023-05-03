@@ -1,0 +1,21 @@
+.full-width{
+  padding-top: 10px;
+  width: 100%;
+}
+
+mat-card{
+  max-width: 50%;
+  margin: 2em auto;
+  text-align: center;
+}
+
+.min-width {
+  width: 100%;
+  min-width: 150px;
+}
+
+.Button-register{
+  display: flex;
+  justify-content: space-around;
+}
+
