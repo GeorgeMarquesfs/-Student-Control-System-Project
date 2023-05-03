@@ -1,5 +1,6 @@
 package com.alunosprofessores.sistema.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,7 @@ import java.util.Random;
 @Data
 @Entity
 @Table(name = "tb_matriculaAluno")
-public class MatriculaAluno implements Serializable {
+public class MatriculaAluno{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +27,6 @@ public class MatriculaAluno implements Serializable {
 
     private Double nota2;
 
-    private StatusMatricula statusMatricula;
-
     @ManyToOne
     @JoinColumn(name = "aluno_id")
     private Aluno aluno;
@@ -35,6 +34,14 @@ public class MatriculaAluno implements Serializable {
     @ManyToOne
     @JoinColumn(name = "disciplina_id")
     private Disciplina disciplina;
+
+    @Enumerated(EnumType.STRING)
+    private StatusMatricula statusMatricula;
+
+    @Enumerated(EnumType.STRING)
+    private StatusAluno statusAluno;
+
+
 
 
     public int gerarMatriculaAleatoria() {

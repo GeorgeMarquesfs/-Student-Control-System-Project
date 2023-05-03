@@ -29,13 +29,10 @@ public class Disciplina {
     private Integer cargaHoraria;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "professor_id", nullable = false)
+    @JoinColumn(name = "professor_id")
+    @JsonBackReference
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Professor professor;
-
-    @Formula("(SELECT nome FROM tb_professor WHERE id = professor_id )")
-    @Column(name = "professor_nome")
-    private String nomeProfessor;
 }
 
 

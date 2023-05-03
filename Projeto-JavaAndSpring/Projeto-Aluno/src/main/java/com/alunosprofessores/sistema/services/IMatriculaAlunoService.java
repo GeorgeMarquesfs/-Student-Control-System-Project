@@ -2,14 +2,17 @@ package com.alunosprofessores.sistema.services;
 
 import com.alunosprofessores.sistema.models.MatriculaAluno;
 import com.alunosprofessores.sistema.models.dtos.MatriculaALunoDto;
+import com.alunosprofessores.sistema.models.dtos.NotasAlunosDto;
 
 import java.util.List;
 
 public interface IMatriculaAlunoService {
 
     MatriculaAluno create(MatriculaAluno matriculaALuno);
-    MatriculaAluno getDisciplina(Long id);
+    MatriculaAluno getMatriculaAluno(Long id);
     List<MatriculaAluno> getAll();
-    MatriculaALunoDto updateDisciplina(Long id, MatriculaALunoDto matriculaALunoDto);
+    void updateMatricula(Long id);
+    MatriculaAluno updateNotasAluno(Long id, NotasAlunosDto notasAlunosDto);
+
     void deleteMatriculaAluno(Long id);
 }
