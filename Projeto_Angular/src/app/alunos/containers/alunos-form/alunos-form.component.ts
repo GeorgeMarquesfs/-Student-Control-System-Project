@@ -22,7 +22,7 @@ export class AlunosFormComponent {
   form = this.formBuilder.group({
     id:[0],
     nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-    matricula: ['', Validators.required],
+    celular: ['', Validators.required],
     dataNasc: this.dataNasc,
     curso: ['', Validators.required],
     email:['',[Validators.required, Validators.email]]
@@ -40,7 +40,7 @@ export class AlunosFormComponent {
       this.form.patchValue({
         id: aluno.id,
         nome: aluno.nome,
-        matricula: aluno.celular,
+        celular: aluno.celular,
         dataNasc: aluno.dataNasc,
         curso: aluno.curso,
         email: aluno.email
@@ -48,7 +48,7 @@ export class AlunosFormComponent {
     } else {
       this.form.patchValue({
         nome: aluno.nome,
-        matricula: aluno.celular,
+        celular: aluno.celular,
         dataNasc: aluno.dataNasc,
         curso: aluno.curso,
         email: aluno.email
