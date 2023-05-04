@@ -1,5 +1,6 @@
 package com.alunosprofessores.sistema.controllers;
 
+import com.alunosprofessores.sistema.models.Disciplina;
 import com.alunosprofessores.sistema.models.dtos.ProfessorDto;
 import com.alunosprofessores.sistema.models.Professor;
 import com.alunosprofessores.sistema.services.Impl.ProfessorServiceImpl;
@@ -32,6 +33,11 @@ public class ProfessorController {
     @GetMapping("/{id}")
     public Professor getProf(@PathVariable Long id) {
         return professorServiceImpl.getProfessor(id);
+    }
+
+    @GetMapping("/listarDisciplinasProf/{id}")
+    public List<Disciplina> getOnlyDisciplinasProfessor(@PathVariable Long id) {
+        return professorServiceImpl.getOnlyDisciplinasProfessor(id);
     }
 
     @GetMapping("/ListaProfessores")

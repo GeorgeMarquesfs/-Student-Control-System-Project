@@ -46,5 +46,11 @@ public class Professor implements Serializable {
     @NotNull(message = "A(s) disciplina(s) não pode ser nula(s)")
     private List<Disciplina> disciplinas = new ArrayList<>();
 
-
+    @Override
+    public String toString() {
+        return "Professor: " + '\n' +
+                "nome : " + getNome() + '\n' +
+                "email : " + getEmail() + '\n' +
+                "disciplinas : " + getDisciplinas();
+    }
 }

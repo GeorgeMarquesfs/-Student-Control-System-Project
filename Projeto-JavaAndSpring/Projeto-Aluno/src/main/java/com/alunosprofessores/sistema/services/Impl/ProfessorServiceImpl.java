@@ -1,11 +1,9 @@
 package com.alunosprofessores.sistema.services.Impl;
 
 import com.alunosprofessores.sistema.models.Disciplina;
-import com.alunosprofessores.sistema.models.dtos.DisciplinaDto;
 import com.alunosprofessores.sistema.models.dtos.ProfessorDto;
 import com.alunosprofessores.sistema.exception.RecordNotFoundException;
 import com.alunosprofessores.sistema.models.Professor;
-import com.alunosprofessores.sistema.repositorys.DisciplinaRepository;
 import com.alunosprofessores.sistema.repositorys.ProfessorRepository;
 import com.alunosprofessores.sistema.services.IProfessorService;
 import org.springframework.beans.BeanUtils;
@@ -43,6 +41,13 @@ public class ProfessorServiceImpl implements IProfessorService {
 
     public Professor getProfessor(Long id){
         return professorRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
+    }
+
+    @Override
+    public List<Disciplina> getOnlyDisciplinasProfessor(Long id) {
+        Optional<Professor> prof = Optional.ofNullable(professorRepository.findById(id).
+                orElseThrow(() -> new RecordNotFoundException(id)));
+        return prof.get().getDisciplinas();
     }
 
     public List<Professor> getAllProf(){

@@ -19,13 +19,6 @@ public class DisciplinaController {
     @Autowired
     DisciplinaServiceImpl disciplinaServiceImpl;
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Disciplina> createDisciplina(@RequestBody @Validated DisciplinaDto disciplinaDTO){
-        Disciplina disciplinaCreated = disciplinaServiceImpl.create(disciplinaDTO);
-        return ResponseEntity.status(201).body(disciplinaCreated);
-    }
-
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public DisciplinaDto getOne(@PathVariable @Positive Long id){
