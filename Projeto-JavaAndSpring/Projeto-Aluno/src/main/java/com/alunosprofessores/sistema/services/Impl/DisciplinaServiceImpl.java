@@ -23,14 +23,6 @@ public class DisciplinaServiceImpl implements IDisciplinaService {
     private ProfessorServiceImpl professorServiceImpl;
 
 
-    public Disciplina create(DisciplinaDto disciplinaDTO){
-        Disciplina disciplinaNew = new Disciplina();
-        disciplinaNew.setNome(disciplinaDTO.getNome());
-        disciplinaNew.setCargaHoraria(disciplinaDTO.getCargaHoraria());
-        disciplinaNew.setProfessor(disciplinaDTO.getProfessor());
-        return disciplinaRepository.save(disciplinaNew);
-    }
-
     public DisciplinaDto getDisciplina(Long id){
         Disciplina disciplina = disciplinaRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException(id));

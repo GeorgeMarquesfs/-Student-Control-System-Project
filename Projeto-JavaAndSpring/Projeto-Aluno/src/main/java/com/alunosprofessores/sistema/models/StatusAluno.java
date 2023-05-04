@@ -1,6 +1,8 @@
 package com.alunosprofessores.sistema.models;
 
-public enum StatusAluno {
+import java.io.Serializable;
+
+public enum StatusAluno implements Serializable {
 
     APROVADO,
     REPROVADO,

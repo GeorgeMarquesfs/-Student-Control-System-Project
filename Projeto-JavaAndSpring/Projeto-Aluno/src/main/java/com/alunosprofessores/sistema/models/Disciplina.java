@@ -9,13 +9,15 @@ import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.io.Serializable;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 @Table(name = "tb_disciplina")
-public class Disciplina {
+public class Disciplina implements Serializable {
 
 
     @Id

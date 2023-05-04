@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface IDisciplinaService {
 
-    Disciplina create(DisciplinaDto disciplinaDTO);
     DisciplinaDto getDisciplina(Long id);
     List<Disciplina> getAll();
     Disciplina updateDisciplina(Long id, Disciplina disciplinaAtt);

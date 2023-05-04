@@ -1,6 +1,8 @@
 package com.alunosprofessores.sistema.models;
 
-public enum StatusMatricula {
+import java.io.Serializable;
+
+public enum StatusMatricula implements Serializable {
 
     MATRICULADO,
     TRANCADO

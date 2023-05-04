@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
@@ -20,7 +21,7 @@ import java.time.LocalDate;
 @SQLDelete(sql = "UPDATE tb_aluno SET status = 'Inativo' WHERE id = ?")
 @Where(clause = "status  = 'Ativo'")
 @Table(name = "tb_aluno")
-public class Aluno {
+public class Aluno implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

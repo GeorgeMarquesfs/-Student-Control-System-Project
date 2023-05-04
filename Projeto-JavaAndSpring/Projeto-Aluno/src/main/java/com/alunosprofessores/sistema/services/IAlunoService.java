@@ -8,7 +8,6 @@ import java.util.List;
 public interface IAlunoService {
 
     Aluno createAlunoService(AlunoDto alunoDTO);
-
     Aluno getAluno(Long id);
     List<Aluno> getAll();
     Aluno updateAluno(Long id,Aluno alunoAtt);
