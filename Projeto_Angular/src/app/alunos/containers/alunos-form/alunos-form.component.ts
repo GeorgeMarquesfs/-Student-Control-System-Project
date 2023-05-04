@@ -40,7 +40,7 @@ export class AlunosFormComponent {
       this.form.patchValue({
         id: aluno.id,
         nome: aluno.nome,
-        matricula: aluno.matricula,
+        matricula: aluno.celular,
         dataNasc: aluno.dataNasc,
         curso: aluno.curso,
         email: aluno.email
@@ -48,7 +48,7 @@ export class AlunosFormComponent {
     } else {
       this.form.patchValue({
         nome: aluno.nome,
-        matricula: aluno.matricula,
+        matricula: aluno.celular,
         dataNasc: aluno.dataNasc,
         curso: aluno.curso,
         email: aluno.email

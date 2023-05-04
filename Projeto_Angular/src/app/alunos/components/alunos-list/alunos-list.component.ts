@@ -13,7 +13,7 @@ export class AlunosListComponent {
   @Output() edit = new EventEmitter(false)
   @Output() delete = new EventEmitter(false)
 
-  readonly displayedColumns = ['nome', 'matricula', 'dataNasc', 'curso', 'email' ,'actions']
+  readonly displayedColumns = ['nome', 'celular', 'dataNasc', 'curso', 'email' ,'actions']
 
 
 
