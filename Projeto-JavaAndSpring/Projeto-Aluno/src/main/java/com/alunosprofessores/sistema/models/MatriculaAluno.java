@@ -42,8 +42,6 @@ public class MatriculaAluno{
     private StatusAluno statusAluno;
 
 
-
-
     public int gerarMatriculaAleatoria() {
         Random random = new Random();
         int numero = random.nextInt(9000) + 1000;

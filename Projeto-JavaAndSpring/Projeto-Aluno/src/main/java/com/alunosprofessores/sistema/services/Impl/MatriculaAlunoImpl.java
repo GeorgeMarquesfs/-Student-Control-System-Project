@@ -1,10 +1,10 @@
 package com.alunosprofessores.sistema.services.Impl;
 
 import com.alunosprofessores.sistema.exception.RecordNotFoundException;
+import com.alunosprofessores.sistema.models.Aluno;
 import com.alunosprofessores.sistema.models.MatriculaAluno;
 import com.alunosprofessores.sistema.models.StatusAluno;
 import com.alunosprofessores.sistema.models.StatusMatricula;
-import com.alunosprofessores.sistema.models.dtos.DisciplinaDto;
 import com.alunosprofessores.sistema.models.dtos.DisicplinasAlunoDto;
 import com.alunosprofessores.sistema.models.dtos.HistoricoAlunoDto;
 import com.alunosprofessores.sistema.models.dtos.NotasAlunosDto;
@@ -15,10 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class MatriculaAlunoImpl implements IMatriculaAlunoService {
@@ -85,39 +82,46 @@ public class MatriculaAlunoImpl implements IMatriculaAlunoService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Só é possível colocar notas em alunos que estejam Matriculado");
         }
     }
-
     @Override
-    public HistoricoAlunoDto historicoAluno(Long id) {
-        List<MatriculaAluno> matriculasDoAluno = matriculaAlunoRepository.findAllById(Collections.singleton(id));
+    public List<HistoricoAlunoDto> historicoAlunos(Long id) {
+        List<MatriculaAluno> matriculasDoAluno = matriculaAlunoRepository.findAllByAlunoId(id);
 
         if (!matriculasDoAluno.isEmpty()) {
-            HistoricoAlunoDto historico = new HistoricoAlunoDto();
+            Map<Long, HistoricoAlunoDto> historicoMap = new HashMap<>();
 
-            historico.setAluno(matriculasDoAluno.get(0).getAluno().getNome());
-            historico.setCurso(matriculasDoAluno.get(0).getAluno().getCurso());
-            List<DisicplinasAlunoDto> disciplinasList = new ArrayList<>();
-            for (MatriculaAluno matricula: matriculasDoAluno) {
-                DisicplinasAlunoDto disciplinasAlunoDto = new DisicplinasAlunoDto();
+            for (MatriculaAluno matricula : matriculasDoAluno) {
+                Aluno aluno = matricula.getAluno();
 
-                disciplinasAlunoDto.setNomeDisciplina(matricula.getDisciplina().getNome());
-                disciplinasAlunoDto.setProfessorDisciplina(matricula.getDisciplina().getProfessor().getNome());
-                disciplinasAlunoDto.setNota1(matricula.getNota1());
-                disciplinasAlunoDto.setNota2(matricula.getNota2());
-                if ((matricula.getNota1() != null && matricula.getNota2() != null)) {
-                    disciplinasAlunoDto.setMedia((matricula.getNota1() + matricula.getNota2()) / 2);
+                HistoricoAlunoDto historico;
+                if (historicoMap.containsKey(aluno.getId())) {
+                    historico = historicoMap.get(aluno.getId());
                 } else {
-                    disciplinasAlunoDto.setMedia(null);
+                    historico = new HistoricoAlunoDto();
+                    historico.setAluno(aluno.getNome());
+                    historico.setCurso(aluno.getCurso());
+                    historico.setMatriculasDisciplinas(new ArrayList<>());
+                    historicoMap.put(aluno.getId(), historico);
                 }
-                disciplinasAlunoDto.setStatusAluno(matricula.getStatusAluno());
 
-                disciplinasList.add(disciplinasAlunoDto);
+                DisicplinasAlunoDto disciplina = new DisicplinasAlunoDto();
+                disciplina.setNomeDisciplina(matricula.getDisciplina().getNome());
+                disciplina.setProfessorDisciplina(matricula.getDisciplina().getProfessor().getNome());
+                disciplina.setNota1(matricula.getNota1());
+                disciplina.setNota2(matricula.getNota2());
+                if ((matricula.getNota1() != null && matricula.getNota2() != null)) {
+                    disciplina.setMedia((matricula.getNota1() + matricula.getNota2()) / 2);
+                } else {
+                    disciplina.setMedia(null);
+                }
+                disciplina.setStatusAluno(matricula.getStatusAluno());
+
+                historico.getMatriculasDisciplinas().add(disciplina);
             }
 
-            historico.setMatriculasDisciplinas(disciplinasList);
-
-            return historico;
+            return new ArrayList<>(historicoMap.values());
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Esse aluno não possui matrículas.");
+
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum aluno encontrado com esse id.");
     }
 
     @Override

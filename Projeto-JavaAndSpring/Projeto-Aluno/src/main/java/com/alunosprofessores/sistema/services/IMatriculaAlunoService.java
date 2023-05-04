@@ -13,7 +13,7 @@ public interface IMatriculaAlunoService {
     List<MatriculaAluno> getAll();
     void updateMatricula(Long id);
     MatriculaAluno updateNotasAluno(Long id, NotasAlunosDto notasAlunosDto);
-    HistoricoAlunoDto historicoAluno(Long id);
+    List<HistoricoAlunoDto> historicoAlunos(Long id);
 
     void deleteMatriculaAluno(Long id);
 }

@@ -29,7 +29,8 @@ public class Aluno {
     private String nome;
 
     @Column(nullable = false, unique = true)
-    private Long matricula;
+    @Pattern(regexp = "^(\\+55)?\\s*\\(?[1-9]{2}\\)?\\s*9?[6-9]\\d{3}\\-?\\d{4}$")
+    private String celular;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)

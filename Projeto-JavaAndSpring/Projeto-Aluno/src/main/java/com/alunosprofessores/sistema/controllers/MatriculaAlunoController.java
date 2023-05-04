@@ -52,8 +52,8 @@ public class MatriculaAlunoController {
 
     @GetMapping("/historicoAluno/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public HistoricoAlunoDto historicoAlunoDto(@PathVariable @Positive Long id){
-        return service.historicoAluno(id);
+    public List<HistoricoAlunoDto> historicoAlunoDto(@PathVariable @Positive Long id){
+        return service.historicoAlunos(id);
     }
 
     @DeleteMapping("/{id}")

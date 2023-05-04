@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class AlunoDto {
 
     private String nome;
-    private Long matricula;
+    private String celular;
     private LocalDate dataNasc;
     private String email;
     private String curso;

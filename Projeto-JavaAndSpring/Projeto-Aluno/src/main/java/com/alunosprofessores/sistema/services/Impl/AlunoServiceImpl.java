@@ -22,7 +22,7 @@ public class AlunoServiceImpl implements IAlunoService {
     public Aluno createAlunoService (AlunoDto alunoDTO){
         Aluno novoAluno = new Aluno();
         novoAluno.setNome(alunoDTO.getNome());
-        novoAluno.setMatricula(alunoDTO.getMatricula());
+        novoAluno.setCelular(alunoDTO.getCelular());
         novoAluno.setDataNasc(alunoDTO.getDataNasc());
         novoAluno.setEmail(alunoDTO.getEmail());
         novoAluno.setCurso(alunoDTO.getCurso());
