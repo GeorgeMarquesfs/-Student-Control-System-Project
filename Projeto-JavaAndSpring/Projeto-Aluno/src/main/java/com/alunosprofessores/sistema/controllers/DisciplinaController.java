@@ -21,7 +21,7 @@ public class DisciplinaController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public DisciplinaDto getOne(@PathVariable @Positive Long id){
+    public Disciplina getOne(@PathVariable @Positive Long id){
         return disciplinaServiceImpl.getDisciplina(id);
     }
 

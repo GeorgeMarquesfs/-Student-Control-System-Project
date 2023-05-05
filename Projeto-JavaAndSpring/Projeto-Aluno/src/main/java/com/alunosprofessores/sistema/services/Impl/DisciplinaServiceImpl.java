@@ -19,21 +19,9 @@ public class DisciplinaServiceImpl implements IDisciplinaService {
     @Autowired
     DisciplinaRepository disciplinaRepository;
 
-    @Autowired
-    private ProfessorServiceImpl professorServiceImpl;
 
-
-    public DisciplinaDto getDisciplina(Long id){
-        Disciplina disciplina = disciplinaRepository.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException(id));
-
-        Professor professor = professorServiceImpl.getProfessor(disciplina.getProfessor().getId());
-
-        return new DisciplinaDto(
-                disciplina.getNome(),
-                disciplina.getCargaHoraria(),
-                professor
-        );
+    public Disciplina getDisciplina(Long id){
+        return disciplinaRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
     public List<Disciplina> getAll(){

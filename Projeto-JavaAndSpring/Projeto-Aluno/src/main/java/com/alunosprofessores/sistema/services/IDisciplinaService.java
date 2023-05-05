@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IDisciplinaService {
 
-    DisciplinaDto getDisciplina(Long id);
+    Disciplina getDisciplina(Long id);
     List<Disciplina> getAll();
     Disciplina updateDisciplina(Long id, Disciplina disciplinaAtt);
     void deleteDisciplina(Long id);
