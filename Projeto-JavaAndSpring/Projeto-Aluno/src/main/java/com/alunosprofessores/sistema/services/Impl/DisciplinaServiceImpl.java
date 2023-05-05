@@ -1,9 +1,7 @@
 package com.alunosprofessores.sistema.services.Impl;
 
-import com.alunosprofessores.sistema.models.dtos.DisciplinaDto;
 import com.alunosprofessores.sistema.exception.RecordNotFoundException;
 import com.alunosprofessores.sistema.models.Disciplina;
-import com.alunosprofessores.sistema.models.Professor;
 import com.alunosprofessores.sistema.repositorys.DisciplinaRepository;
 import com.alunosprofessores.sistema.services.IDisciplinaService;
 import org.springframework.beans.BeanUtils;
