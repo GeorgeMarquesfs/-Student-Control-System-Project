@@ -10,6 +10,7 @@ import com.alunosprofessores.sistema.models.dtos.HistoricoAlunoDto;
 import com.alunosprofessores.sistema.models.dtos.NotasAlunosDto;
 import com.alunosprofessores.sistema.repositorys.MatriculaAlunoRepository;
 import com.alunosprofessores.sistema.services.IMatriculaAlunoService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -84,9 +85,9 @@ public class MatriculaAlunoImpl implements IMatriculaAlunoService {
     }
     @Override
     public List<HistoricoAlunoDto> historicoAlunos(Long id) {
-        List<MatriculaAluno> matriculasDoAluno = matriculaAlunoRepository.findAllByAlunoId(id);
+        try {
+            List<MatriculaAluno> matriculasDoAluno = matriculaAlunoRepository.findAllByAlunoId(id);
 
-        if (!matriculasDoAluno.isEmpty()) {
             Map<Long, HistoricoAlunoDto> historicoMap = new HashMap<>();
 
             for (MatriculaAluno matricula : matriculasDoAluno) {
@@ -119,9 +120,10 @@ public class MatriculaAlunoImpl implements IMatriculaAlunoService {
             }
 
             return new ArrayList<>(historicoMap.values());
+        } catch (EntityNotFoundException e) {
+            // Se ocorrer a exceção EntityNotFoundException, retorne uma lista vazia.
+            return Collections.emptyList();
         }
-
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum aluno encontrado com esse id.");
     }
 
     @Override

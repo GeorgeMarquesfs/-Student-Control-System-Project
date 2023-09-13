@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api/aluno")
 @CrossOrigin(origins = "*")
@@ -20,7 +19,6 @@ public class AlunoController {
 
     @Autowired
     AlunoServiceImpl alunoServiceImpl;
-
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
